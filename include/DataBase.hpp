@@ -170,19 +170,6 @@ void DataBase::randomFillRows(
     static std::uniform_int_distribution<size_t> randomRowAmount{CHKORES, MINCH};
     static const size_t key_l = 5;
     static const size_t value_l = 10;
-    size_t defaultRowAmount = randomRowAmount(generator);
-
-    BOOST_LOG_TRIVIAL(debug) << "Fill family: default";
-    for (size_t i = 0; i < defaultRowAmount; ++i) {
-        std::string key = createRandomString(key_l);
-        std::string value = createRandomString(value_l);
-        Status status = db_->Put(WriteOptions(),
-                                 key,
-                                 value);
-        assert(status.ok());
-        BOOST_LOG_TRIVIAL(debug) << key << " : " << value;
-    }
-
     for (const std::unique_ptr<ColumnFamilyHandle> &family : container) {
         BOOST_LOG_TRIVIAL(debug) << "Fill family: " << family->GetName();
         size_t rowAmount = randomRowAmount(generator);
