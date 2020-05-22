@@ -79,7 +79,7 @@ std::string createRandomString(size_t length)
 
     static std::mt19937 generator{std::random_device{}()};
     static std::uniform_int_distribution<size_t> random{
-        0, charecters.size() - 1};
+        0, CHARACTERS};
 
     std::string result;
     for (size_t i = 0; i < length; ++i) {

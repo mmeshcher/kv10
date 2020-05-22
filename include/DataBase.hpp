@@ -14,6 +14,7 @@
 #include <PicoSHA2/picosha2.hpp>
 
 #include "Random.hpp"
+#include "Globals.hpp"
 
 class DataBase
 {
@@ -143,7 +144,7 @@ DataBase::randomFillFamilies()
 {
     using namespace rocksdb;
     static std::mt19937 generator{std::random_device{}()};
-    static std::uniform_int_distribution<size_t> randomFamilyAmount{1, 5};
+    static std::uniform_int_distribution<size_t> randomFamilyAmount{BAREV, CHKORES};
     size_t familyAmount = randomFamilyAmount(generator);
     std::list<std::unique_ptr<rocksdb::ColumnFamilyHandle>> families{};        
     for (size_t i = 0; i < familyAmount; ++i) {
@@ -166,7 +167,7 @@ void DataBase::randomFillRows(
 {
     using namespace rocksdb;
     static std::mt19937 generator{std::random_device{}()};
-    static std::uniform_int_distribution<size_t> randomRowAmount{5, 25};
+    static std::uniform_int_distribution<size_t> randomRowAmount{CHKORES, MINCH};
     static const size_t key_l = 5;
     static const size_t value_l = 10;
     size_t defaultRowAmount = randomRowAmount(generator);
