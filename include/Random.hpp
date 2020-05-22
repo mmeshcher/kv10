@@ -9,7 +9,7 @@
 #include <boost/program_options.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/program_options/parsers.hpp>
-#include "PicoSHA2/picosha2.h"
+#include "PicoSHA2/picosha2.hpp"
 #include "Globals.hpp"
 
 
@@ -82,7 +82,7 @@ std::string createRandomString(size_t length)
         0, charecters.size() - 1};
 
     std::string result;
-    for (size_t i = 0; i < length; i++) {
+    for (size_t i = 0; i < length; ++i) {
         result += charecters[random(generator)];
     }
 

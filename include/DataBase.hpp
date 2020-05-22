@@ -11,7 +11,7 @@
 #include <rocksdb/db.h>
 #include <rocksdb/slice.h>
 #include <rocksdb/options.h>
-#include <PicoSHA2/picosha2.h>
+#include <PicoSHA2/picosha2.hpp>
 
 #include "Random.hpp"
 
@@ -172,7 +172,7 @@ void DataBase::randomFillRows(
     size_t defaultRowAmount = randomRowAmount(generator);
 
     BOOST_LOG_TRIVIAL(debug) << "Fill family: default";
-    for (size_t i = 0; i < defaultRowAmount; i++) {
+    for (size_t i = 0; i < defaultRowAmount; ++i) {
         std::string key = createRandomString(key_l);
         std::string value = createRandomString(value_l);
         Status status = db_->Put(WriteOptions(),
@@ -185,7 +185,7 @@ void DataBase::randomFillRows(
     for (const std::unique_ptr<ColumnFamilyHandle> &family : container) {
         BOOST_LOG_TRIVIAL(debug) << "Fill family: " << family->GetName();
         size_t rowAmount = randomRowAmount(generator);
-        for (size_t i = 0; i < rowAmount; i++) {
+        for (size_t i = 0; i < rowAmount; ++i) {
             std::string key = createRandomString(key_l);
             std::string value = createRandomString(value_l);
 
